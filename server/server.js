@@ -13,14 +13,30 @@ io.on('connection',(socket)=> {
 	console.log('new user connected');
 
 	socket.emit('newMessage',{
-		from : 'aditya',
-		text : 'hy this is aditya',
-		time : 12
+		from : 'Admin',
+		text : 'Welcome to the chat app'
 	});
+	socket.broadcast.emit('newMessage',{
+		from : 'Admin',
+		text : 'New user joined',
+		createdAt : new Date().getTime()
+
+	})
+
+	// socket.emit('newMessage',{
+	// 	from : 'aditya',
+	// 	text : 'hy this is aditya',
+	// 	time : 12
+	// });
 
 
-	socket.on('createMessage',(newMessage)=>{
-		console.log('new message was received ith data',newMessage);
+	socket.on('createMessage',(message)=>{
+		console.log('new message was received ith data',message);
+		io.emit('newMessage',{
+			from : message.from,
+			text  : message.text,
+			time : new Date().getTime()
+		});
 	});
 
 	socket.on('disconnect',()=>{
