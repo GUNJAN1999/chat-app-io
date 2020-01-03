@@ -40,12 +40,16 @@
 		if(!navigator.geolocation){
 		return alert('Geoloaction not supported by browser');
 	    }
+
+	    locationButton.attr('disabled','dissabled').text('Sending Location');
 		navigator.geolocation.getCurrentPosition(function (position){
+			locationButton.removeAttr('disabled').text('Send Location');
 			socket.emit('createLocationMessage',{
 				latitude : position.coords.latitude,
 				longitude : position.coords.longitude,
 			});
 		},function (){
+			locationButton.removeAttr('disabled').text('Send Location');
 			console.log("unable to fetch location");
 		});
 
