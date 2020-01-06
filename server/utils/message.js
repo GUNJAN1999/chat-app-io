@@ -1,9 +1,9 @@
-
+var moment =require('moment')
 var generatedMessage =(from ,text)=>{
 	return{
 		from,
 		text ,
-		createdAt : new Date().getTime()
+		createdAt : moment.valueOf()
 	};
 
 };
@@ -12,7 +12,7 @@ var generatedLocationMessage=(from,lat,long)=>{
 	return {
 		from,
 		url:`https://www.google.com/maps?q=${lat},${long}`,
-		createdAt : new Date().getTime()
+		createdAt :  moment.valueOf()
 	};
 };
 
