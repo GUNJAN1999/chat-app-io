@@ -1,4 +1,7 @@
  var socket = io();
+ 	function scrollToBottom(){
+
+ 	}
 	socket.on('connect',()=>{
 	console.log('connected to server');
 	
@@ -17,6 +20,7 @@
 			createdAt : formattedTime
 		})
 		jQuery('#messages').append(html);
+		
 	});
 
 	socket.on('newLocationMessage',function (message){
@@ -27,12 +31,8 @@
 			url: message.url,
 			createdAt : formattedTime
 		})
-		// var li = jQuery('<li></li>');
-		// var a= jQuery('<a target="_blank">My Current Location </a>');
-		// li.text(`${message.from}  ${formattedTime}:`);
-		// a.attr('href',message.url);
-		// li.append(a);
 		jQuery('#messages').append(html);
+		
 	})
 
 	jQuery("#message-form").on('submit',function (e) {
